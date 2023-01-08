@@ -19,6 +19,11 @@ if(!username || !avatar) {
     return       
 }
 
+const usersLogged = users.find(user => user.username === username) 
+if(usersLogged){
+    res.status(409).send("Já existe um usuário com esse nome")
+    return
+}
 users.push({username, avatar})
 res.send("OK")
 })
@@ -26,11 +31,17 @@ res.send("OK")
   
   app.post('/tweets', (req, res) => {
     const {username , tweet}   = req.body
+
+    if(!tweet) {
+        res.status(400).send("Campo de mensagem em branco!")
+        return
+    }
+    if(!username){
+        res.status(401).send("Usuario invalido!")
+        return
+    }
     tweets.push({username, tweet})
     res.send("OK")
-
-
-    res.send(tweets)
   })
   
 
