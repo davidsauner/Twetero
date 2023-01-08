@@ -31,6 +31,7 @@ res.send("OK")
   
   app.post('/tweets', (req, res) => {
     const {username , tweet}   = req.body
+    const {avatar} = users.find(user => user.username === username)
 
     if(!tweet) {
         res.status(400).send("Campo de mensagem em branco!")
@@ -40,14 +41,15 @@ res.send("OK")
         res.status(401).send("Usuario invalido!")
         return
     }
-    tweets.push({username, tweet})
+    tweets.push({username, tweet , avatar})
     res.send("OK")
   })
   
 
 
   app.get('/tweets', (req, res) => {
-    res.send("ok")
+    res.send(tweets)
+
   })
 
 
