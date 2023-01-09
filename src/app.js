@@ -31,14 +31,14 @@ res.send("OK")
   
   app.post('/tweets', (req, res) => {
     const {username , tweet}   = req.body
-    const {avatar} = users.find(user => user.username === username)
+    const avatar = users.find(user => user.username === username)
 
     if(!tweet) {
         res.status(400).send("Campo de mensagem em branco!")
         return
     }
     if(!username){
-        res.status(401).send("“UNAUTHORIZED”")
+        res.status(401).send("UNAUTHORIZED")
         return
     }
     tweets.push({username, tweet , avatar})
@@ -48,7 +48,7 @@ res.send("OK")
 
 
   app.get('/tweets', (req, res) => {
-    res.send(tweets)
+    res.send(tweets.slice(-10).reverse())
 
   })
 
