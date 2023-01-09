@@ -38,7 +38,7 @@ res.send("OK")
         return
     }
     if(!username){
-        res.status(401).send("Usuario invalido!")
+        res.status(401).send("“UNAUTHORIZED”")
         return
     }
     tweets.push({username, tweet , avatar})
