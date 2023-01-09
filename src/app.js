@@ -31,16 +31,19 @@ res.send("OK")
   
   app.post('/tweets', (req, res) => {
     const {username , tweet}   = req.body
-    const avatar = users.find(user => user.username === username)
-
-    if(!tweet) {
-        res.status(400).send("Campo de mensagem em branco!")
-        return
-    }
-    if(!username){
+    const usersLogged = users.find(user => user.username === username) 
+    
+     if(!usersLogged){
         res.status(401).send("UNAUTHORIZED")
         return
-    }
+     }
+    if(!tweet) {
+      res.status(400).send("Campo de mensagem em branco!")
+      return
+  } 
+    
+  
+    const {avatar} = users.find(user => user.username === username)
     tweets.push({username, tweet , avatar})
     res.send("OK")
   })
